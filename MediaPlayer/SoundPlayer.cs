@@ -9,23 +9,15 @@ namespace MediaPlayer
 {
     public class SoundPlayer
     {
-        public string filePath = @"C:\Users\Andrew\Documents\visual studio 2013\Projects\MediaPlayer\MediaPlayer\Songs\" + filename + ".mp3";
-        public static string filename = "Nicki_Minaj_-_The_Night_Is_Still_Young_(Audio) Extended";
-        
         public IWavePlayer waveOutDevice;        
         public Mp3FileReader playTime;
         public Mp3FileReader mp3FileReader;
         public static byte[] audioData;
         public static short[] audioDataShort;
-
         public static GraphAudioBuffer graphAudioBuffer;
-
         public static byte[] completeMusicFile;
-
         public static int bufferSize = 300; 
-        
         private const int offset = 2000;
-
         public static event EventHandler songLoadedEvent;
 
         public SoundPlayer(string path)
@@ -47,17 +39,12 @@ namespace MediaPlayer
             graphAudioBuffer = new GraphAudioBuffer();
             songLoadedEvent(null, null);
         }      
-        private void CurrentPlayTimeChanged(object sender, EventArgs e)
-        {
-            
-        }
 
         public void Play(){
             waveOutDevice.Play();
            
         }
 
-       
         public void updateGraph(int songPosition){
             songPosition += offset;
             if( songPosition >= completeMusicFile.Length)
@@ -72,13 +59,8 @@ namespace MediaPlayer
                     graphAudioBuffer.addSample(audioDataShort[x]);
                 }
             }
-
-
-
         }
 
-         
-        
         public void Pause(){
            waveOutDevice.Pause();
         }
@@ -88,11 +70,5 @@ namespace MediaPlayer
             waveOutDevice.Stop();
             mp3FileReader.Seek(0, 0);
         }
-
-
-
-
-
-
     }
 }
