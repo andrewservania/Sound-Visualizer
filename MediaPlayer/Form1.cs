@@ -59,7 +59,7 @@ namespace MediaPlayer
 
                     songLoadingProgressBar.Visible = true;
                     songLoadingProgressBar.Style = ProgressBarStyle.Marquee;
-
+                    songLoadingLabel.Visible = true;
                     Thread songLoadingThread = new Thread(new ParameterizedThreadStart(loadSong));
                     songLoadingThread.Start(songFilename);
 
@@ -96,6 +96,7 @@ namespace MediaPlayer
             MethodInvoker invoker = delegate
             {
                 songLoadingProgressBar.Visible = false;
+                songLoadingLabel.Visible = false;
                 chart1.DataSource = GraphAudioBuffer.audioData;
                 chart1.DataBind();
                 
@@ -254,7 +255,7 @@ namespace MediaPlayer
 
                 songLoadingProgressBar.Visible = true;
                 songLoadingProgressBar.Style = ProgressBarStyle.Marquee;
-
+                songLoadingLabel.Visible = true;
                 Thread songLoadingThread = new Thread(new ParameterizedThreadStart(loadSong));
                 songLoadingThread.Start(songFileName);
                 
@@ -333,10 +334,9 @@ namespace MediaPlayer
         {
             if (soundPlayer != null)
             {
-                float scrollPercentage = 100 - (e.NewValue * 91) / 100;
-
-                soundPlayer.waveOutDevice.Volume = scrollPercentage / 100;
-
+                double percent = 1.0-(e.NewValue/91.0);
+                volumePercentageLabel.Text = Math.Round(percent*100.0) + "%";
+                soundPlayer.waveOutDevice.Volume = (float)(percent);
 
             }
         }

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -46,6 +46,9 @@
             this.volumeBar = new System.Windows.Forms.VScrollBar();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.volumePercentageLabel = new System.Windows.Forms.Label();
+            this.songLoadingLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -55,41 +58,41 @@
             this.chart1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.chart1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.chart1.BorderlineWidth = 10;
-            chartArea3.Area3DStyle.Enable3D = true;
-            chartArea3.Area3DStyle.PointDepth = 1000;
-            chartArea3.AxisX.LineColor = System.Drawing.Color.White;
-            chartArea3.AxisX2.LabelStyle.ForeColor = System.Drawing.Color.Gold;
-            chartArea3.AxisX2.LineColor = System.Drawing.Color.Gold;
-            chartArea3.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
-            chartArea3.AxisY.LineColor = System.Drawing.Color.Gold;
-            chartArea3.AxisY2.LabelStyle.ForeColor = System.Drawing.Color.White;
-            chartArea3.AxisY2.LineColor = System.Drawing.Color.Gold;
-            chartArea3.BackColor = System.Drawing.Color.MidnightBlue;
-            chartArea3.BorderColor = System.Drawing.Color.White;
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
+            chartArea1.Area3DStyle.Enable3D = true;
+            chartArea1.Area3DStyle.PointDepth = 1000;
+            chartArea1.AxisX.LineColor = System.Drawing.Color.White;
+            chartArea1.AxisX2.LabelStyle.ForeColor = System.Drawing.Color.Gold;
+            chartArea1.AxisX2.LineColor = System.Drawing.Color.Gold;
+            chartArea1.AxisY.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea1.AxisY.LineColor = System.Drawing.Color.Gold;
+            chartArea1.AxisY2.LabelStyle.ForeColor = System.Drawing.Color.White;
+            chartArea1.AxisY2.LineColor = System.Drawing.Color.Gold;
+            chartArea1.BackColor = System.Drawing.Color.MidnightBlue;
+            chartArea1.BorderColor = System.Drawing.Color.White;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.DataSource = this.chart1.Images;
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend3.Enabled = false;
-            legend3.Name = "Legend1";
-            this.chart1.Legends.Add(legend3);
+            legend1.Enabled = false;
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
-            series3.BackImageTransparentColor = System.Drawing.Color.White;
-            series3.BorderColor = System.Drawing.Color.White;
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Color = System.Drawing.Color.Lime;
-            series3.IsXValueIndexed = true;
-            series3.LabelBorderColor = System.Drawing.Color.White;
-            series3.LabelForeColor = System.Drawing.Color.BlanchedAlmond;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            series3.XValueMember = "X";
-            series3.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            series3.YValueMembers = "Y";
-            this.chart1.Series.Add(series3);
+            series1.BackImageTransparentColor = System.Drawing.Color.White;
+            series1.BorderColor = System.Drawing.Color.White;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Color = System.Drawing.Color.Lime;
+            series1.IsXValueIndexed = true;
+            series1.LabelBorderColor = System.Drawing.Color.White;
+            series1.LabelForeColor = System.Drawing.Color.BlanchedAlmond;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            series1.XValueMember = "X";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            series1.YValueMembers = "Y";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(1048, 630);
             this.chart1.TabIndex = 3;
             this.chart1.Text = "soundChart";
@@ -118,7 +121,7 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -175,7 +178,7 @@
             this.songName.BackColor = System.Drawing.Color.DarkBlue;
             this.songName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.songName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.songName.Location = new System.Drawing.Point(414, -2);
+            this.songName.Location = new System.Drawing.Point(256, -2);
             this.songName.Name = "songName";
             this.songName.Size = new System.Drawing.Size(128, 26);
             this.songName.TabIndex = 4;
@@ -195,10 +198,9 @@
             // 
             // songLoadingProgressBar
             // 
-            this.songLoadingProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.songLoadingProgressBar.Location = new System.Drawing.Point(690, 587);
+            this.songLoadingProgressBar.Location = new System.Drawing.Point(373, 247);
             this.songLoadingProgressBar.Name = "songLoadingProgressBar";
-            this.songLoadingProgressBar.Size = new System.Drawing.Size(331, 31);
+            this.songLoadingProgressBar.Size = new System.Drawing.Size(331, 59);
             this.songLoadingProgressBar.TabIndex = 7;
             this.songLoadingProgressBar.Visible = false;
             // 
@@ -236,11 +238,46 @@
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.CheckedChanged += new System.EventHandler(this.ThreeD_radioButton_CheckedChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 361);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Volume";
+            // 
+            // volumePercentageLabel
+            // 
+            this.volumePercentageLabel.AutoSize = true;
+            this.volumePercentageLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.volumePercentageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.volumePercentageLabel.ForeColor = System.Drawing.Color.Lime;
+            this.volumePercentageLabel.Location = new System.Drawing.Point(4, 144);
+            this.volumePercentageLabel.Name = "volumePercentageLabel";
+            this.volumePercentageLabel.Size = new System.Drawing.Size(68, 26);
+            this.volumePercentageLabel.TabIndex = 12;
+            this.volumePercentageLabel.Text = "100%";
+            // 
+            // songLoadingLabel
+            // 
+            this.songLoadingLabel.AutoSize = true;
+            this.songLoadingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.songLoadingLabel.Location = new System.Drawing.Point(414, 257);
+            this.songLoadingLabel.Name = "songLoadingLabel";
+            this.songLoadingLabel.Size = new System.Drawing.Size(249, 39);
+            this.songLoadingLabel.TabIndex = 13;
+            this.songLoadingLabel.Text = "Loading song...";
+            this.songLoadingLabel.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1048, 630);
+            this.Controls.Add(this.songLoadingLabel);
+            this.Controls.Add(this.volumePercentageLabel);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.volumeBar);
@@ -281,6 +318,9 @@
         private System.Windows.Forms.VScrollBar volumeBar;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label volumePercentageLabel;
+        private System.Windows.Forms.Label songLoadingLabel;
     }
 }
 
