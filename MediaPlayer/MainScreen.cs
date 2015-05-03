@@ -15,7 +15,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace MediaPlayer
 {
-    public partial class Form1 : Form
+    public partial class MainScreen : Form
     {
         public SoundPlayer soundPlayer;
 
@@ -28,10 +28,17 @@ namespace MediaPlayer
         public const string chartingAreaName = "Draw";
         public static string songFileName = string.Empty;
 
-       
-        public Form1()
+        string lastSongName = string.Empty;
+        public static long start = 0;
+        public static long endTime;
+        public static long seekStepValue;
+        public static int seekPrecision;
+        public MainScreen()
         {
             InitializeComponent();
+            seekPrecision = seekBar.Maximum;
+            double percent = 1.0 - (volumeBar.Value / 91.0);
+            volumePercentageLabel.Text = Math.Round(percent * 100.0) + "%";
             InitializeChart();
             SoundPlayer.songLoadedEvent += new EventHandler(songLoadedEvent);
 
@@ -102,8 +109,7 @@ namespace MediaPlayer
                 
             };
             this.Invoke(invoker);
-            //PlayButton_Click(null, null);
-            
+            //PlayButton_Click(null, null
         }
 
         public void InitializeChart()
@@ -143,7 +149,7 @@ namespace MediaPlayer
                     songPositionthreadStart = new ThreadStart(ReadSongPositionAsync);
                     readSongPositionThread = new Thread(songPositionthreadStart);
 
-                    currentTimeThreadStart = new ThreadStart(ReadCurrentSongTime);
+                    currentTimeThreadStart = new ThreadStart(UpdateCurrentSongTime);
                     readCurrentTimeThread = new Thread(currentTimeThreadStart);
                     
                     readSongPositionThread.Start();
@@ -157,7 +163,6 @@ namespace MediaPlayer
         {
             while (soundPlayer.mp3FileReader.Position < soundPlayer.mp3FileReader.Length)
             {
-               // System.Diagnostics.Debug.WriteLine("Position: " + soundPlayer.mp3FileReader.Position + "            \r");
 
                 MethodInvoker inv1 = delegate
                 {
@@ -174,7 +179,7 @@ namespace MediaPlayer
             }
         }
 
-        public void ReadCurrentSongTime(){
+        public void UpdateCurrentSongTime(){
 
             while (soundPlayer.mp3FileReader.CurrentTime < soundPlayer.mp3FileReader.TotalTime)
             {
@@ -182,17 +187,12 @@ namespace MediaPlayer
                 {
                     this.songTimeLabel.Text = soundPlayer.mp3FileReader.CurrentTime.ToString().Remove(
                         soundPlayer.mp3FileReader.CurrentTime.ToString().Length-5,5);
-
+                    seekBar.Value = (int)(soundPlayer.mp3FileReader.Position / seekStepValue);
 
                 };
                 this.Invoke(inv);
                 Thread.Sleep(100);
             }
-        }
-
-        public void ReadAudioRealtime()
-        {
-
         }
 
         private void PauzeButton_Click(object sender, EventArgs e)
@@ -222,7 +222,7 @@ namespace MediaPlayer
             songPositionthreadStart = new ThreadStart(ReadSongPositionAsync);
             readSongPositionThread = new Thread(songPositionthreadStart);
 
-            currentTimeThreadStart = new ThreadStart(ReadCurrentSongTime);
+            currentTimeThreadStart = new ThreadStart(UpdateCurrentSongTime);
             readCurrentTimeThread = new Thread(currentTimeThreadStart);
         }
 
@@ -236,7 +236,6 @@ namespace MediaPlayer
 
         }
 
-        string lastSongName = string.Empty;
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -250,16 +249,16 @@ namespace MediaPlayer
             if(result == DialogResult.OK)
             {
                 reset();
-                songFileName = openFileDialog.FileName;
-                lastSongName = songFileName;
 
                 songLoadingProgressBar.Visible = true;
                 songLoadingProgressBar.Style = ProgressBarStyle.Marquee;
                 songLoadingLabel.Visible = true;
+                songFileName = openFileDialog.FileName;
                 Thread songLoadingThread = new Thread(new ParameterizedThreadStart(loadSong));
                 songLoadingThread.Start(songFileName);
                 
                 songName.Text = openFileDialog.SafeFileName;
+
             }
     
         }
@@ -277,6 +276,11 @@ namespace MediaPlayer
         public void loadSong(object fileName){
 
             soundPlayer = new SoundPlayer((fileName).ToString());
+
+            double percent = 1.0 - (volumeBar.Value / 91.0);
+            soundPlayer.waveOutDevice.Volume = (float)percent;
+            endTime = soundPlayer.mp3FileReader.Length;
+            seekStepValue = endTime / seekPrecision;
             PlayButton_Click(null, null);
         }
       
@@ -320,7 +324,7 @@ namespace MediaPlayer
             songPositionthreadStart = new ThreadStart(ReadSongPositionAsync);
             readSongPositionThread = new Thread(songPositionthreadStart);
 
-            currentTimeThreadStart = new ThreadStart(ReadCurrentSongTime);
+            currentTimeThreadStart = new ThreadStart(UpdateCurrentSongTime);
             readCurrentTimeThread = new Thread(currentTimeThreadStart);
 
 
@@ -332,12 +336,11 @@ namespace MediaPlayer
 
         private void volumeBar_Scroll(object sender, ScrollEventArgs e)
         {
+            double percent = 1.0 - (e.NewValue / 91.0);
+            volumePercentageLabel.Text = Math.Round(percent * 100.0) + "%";
             if (soundPlayer != null)
             {
-                double percent = 1.0-(e.NewValue/91.0);
-                volumePercentageLabel.Text = Math.Round(percent*100.0) + "%";
                 soundPlayer.waveOutDevice.Volume = (float)(percent);
-
             }
         }
 
@@ -349,6 +352,16 @@ namespace MediaPlayer
         private void ThreeD_radioButton_CheckedChanged(object sender, EventArgs e)
         {
             chart1.ChartAreas.First().Area3DStyle.Enable3D = true;
+        }
+
+
+        private void seekBar_Scroll(object sender, EventArgs e)
+        {
+            if (soundPlayer != null)
+            {
+                soundPlayer.mp3FileReader.Seek(((TrackBar)sender).Value * seekStepValue, SeekOrigin.Begin);
+            }
+        
         }
 
 
