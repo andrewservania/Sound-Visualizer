@@ -9,28 +9,29 @@ namespace MediaPlayer
 {
     public class SoundPlayer
     {
-        public IWavePlayer waveOutDevice;        
-        public Mp3FileReader playTime;
-        public Mp3FileReader mp3FileReader;
+        public IWavePlayer waveOutDevice1;
+
+        public Mp3FileReader mp3FileReader1;
+        public Mp3FileReader mp3FileReader2;
         public static byte[] audioData;
         public static short[] audioDataShort;
         public static GraphAudioBuffer graphAudioBuffer;
         public static byte[] completeMusicFile;
-        public static int bufferSize = 300; 
-        private const int offset = 2000;
+        public static int bufferSize = 800; 
         public static event EventHandler songLoadedEvent;
+        
 
         public SoundPlayer(string path)
         {
             string tempFilePath = @""+path;
-            waveOutDevice = new WaveOut();
-            mp3FileReader = new Mp3FileReader(tempFilePath);
-            completeMusicFile = new byte[mp3FileReader.Length];
+            waveOutDevice1 = new WaveOut();
 
-            mp3FileReader.Read(completeMusicFile, 0, Convert.ToInt32(mp3FileReader.Length));
+
+            mp3FileReader1 = new Mp3FileReader(tempFilePath);
+            waveOutDevice1.Init(mp3FileReader1);
+            mp3FileReader2 = new Mp3FileReader(tempFilePath);
             
-            mp3FileReader = new Mp3FileReader(tempFilePath);
-            waveOutDevice.Init(mp3FileReader);
+
 
             
 
@@ -41,34 +42,32 @@ namespace MediaPlayer
         }      
 
         public void Play(){
-            waveOutDevice.Play();
-           
+            waveOutDevice1.Play();
         }
 
-        public void updateGraph(int songPosition){
-            songPosition += offset;
-            if( songPosition >= completeMusicFile.Length)
-            {
-                //Don't do nothing.
-            }
-            else
-            {
-                Buffer.BlockCopy(completeMusicFile, songPosition, audioDataShort, 0, bufferSize);
-                for (int x = 0; x < audioDataShort.Length; x++)
-                {
-                    graphAudioBuffer.addSample(audioDataShort[x]);
-                }
-            }
+        public async Task updateGraph(){
+
+
+            await mp3FileReader2.ReadAsync(audioData, 0, audioData.Length);
+             Buffer.BlockCopy(audioData, 0, audioDataShort, 0, audioData.Length);
+             for (int x = 0; x < audioDataShort.Length; x++)
+             {
+                 graphAudioBuffer.addSample(audioDataShort[x]);
+             }
+            
         }
 
         public void Pause(){
-           waveOutDevice.Pause();
+           waveOutDevice1.Pause();
+
         }
 
         public void Stop()
         {
-            waveOutDevice.Stop();
-            mp3FileReader.Seek(0, 0);
+            waveOutDevice1.Stop();
+
+            mp3FileReader1.Seek(0, 0);
+
         }
     }
 }

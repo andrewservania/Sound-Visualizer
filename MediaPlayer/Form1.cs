@@ -21,13 +21,11 @@ namespace MediaPlayer
 
         public ThreadStart songPositionthreadStart;
         public Thread readSongPositionThread;
-
         public ThreadStart currentTimeThreadStart;
         public Thread readCurrentTimeThread;
-
         public const string chartingAreaName = "Draw";
         public static string songFileName = string.Empty;
-
+        public string lastSongName = string.Empty;
        
         public Form1()
         {
@@ -98,7 +96,7 @@ namespace MediaPlayer
                 songLoadingProgressBar.Visible = false;
                 songLoadingLabel.Visible = false;
                 chart1.DataSource = GraphAudioBuffer.audioData;
-                chart1.DataBind();
+               // chart1.DataBind();
                 
             };
             this.Invoke(invoker);
@@ -114,8 +112,8 @@ namespace MediaPlayer
             chart1.DataSource = GraphAudioBuffer.audioData;
             chart1.DataBind();
 
-            chart1.ChartAreas.First().AxisY.Minimum = -32000.0;
-            chart1.ChartAreas.First().AxisY.Maximum = 32000.0;
+            chart1.ChartAreas.First().AxisY.Minimum = -32000.0*2;
+            chart1.ChartAreas.First().AxisY.Maximum = 32000.0*2;
 
 
             // Info: https://www.daniweb.com/software-development/csharp/code/451281/simple-line-graph-charting
@@ -135,7 +133,7 @@ namespace MediaPlayer
             }
             else
             {
-                if(soundPlayer.waveOutDevice.PlaybackState == PlaybackState.Playing ){
+                if(soundPlayer.waveOutDevice1.PlaybackState == PlaybackState.Playing ){
                 // Don't do anything
                 }
                 else
@@ -145,48 +143,47 @@ namespace MediaPlayer
 
                     currentTimeThreadStart = new ThreadStart(ReadCurrentSongTime);
                     readCurrentTimeThread = new Thread(currentTimeThreadStart);
-                    
+                    soundPlayer.Play();
                     readSongPositionThread.Start();
                     readCurrentTimeThread.Start();
                 }
-                soundPlayer.Play();
+                
             }
         }
 
         public void ReadSongPositionAsync()
         {
-            while (soundPlayer.mp3FileReader.Position < soundPlayer.mp3FileReader.Length)
+            while (soundPlayer.mp3FileReader1.Position < soundPlayer.mp3FileReader1.Length)
             {
-               // System.Diagnostics.Debug.WriteLine("Position: " + soundPlayer.mp3FileReader.Position + "            \r");
-
+ 
                 MethodInvoker inv1 = delegate
                 {
 
-                    soundPlayer.updateGraph(Convert.ToInt32(soundPlayer.mp3FileReader.Position));
+                    soundPlayer.updateGraph();
                     chart1.DataBind();
-                    chart1.Update();
-
+                    //chart1.Update();
+                    
                 };
                 this.Invoke(inv1);
-
-
                 Thread.Sleep(1);
+                
+                
             }
         }
 
         public void ReadCurrentSongTime(){
 
-            while (soundPlayer.mp3FileReader.CurrentTime < soundPlayer.mp3FileReader.TotalTime)
+            while (soundPlayer.mp3FileReader1.CurrentTime < soundPlayer.mp3FileReader1.TotalTime)
             {
                 MethodInvoker inv = delegate
                 {
-                    this.songTimeLabel.Text = soundPlayer.mp3FileReader.CurrentTime.ToString().Remove(
-                        soundPlayer.mp3FileReader.CurrentTime.ToString().Length-5,5);
+                    this.songTimeLabel.Text = soundPlayer.mp3FileReader1.CurrentTime.ToString().Remove(
+                        soundPlayer.mp3FileReader1.CurrentTime.ToString().Length - 5, 5);
 
 
                 };
                 this.Invoke(inv);
-                Thread.Sleep(100);
+                Thread.Sleep(10);
             }
         }
 
@@ -236,7 +233,7 @@ namespace MediaPlayer
 
         }
 
-        string lastSongName = string.Empty;
+
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -282,7 +279,7 @@ namespace MediaPlayer
       
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Andrew's little Media Player :)\nCopyright (c) 2015 Andrew Servania");
+            MessageBox.Show("Sound Visualizer 0.1 Beta\nCopyright (c) 2015 Andrew Servania");
         }
 
         public void clear()
@@ -336,7 +333,7 @@ namespace MediaPlayer
             {
                 double percent = 1.0-(e.NewValue/91.0);
                 volumePercentageLabel.Text = Math.Round(percent*100.0) + "%";
-                soundPlayer.waveOutDevice.Volume = (float)(percent);
+                soundPlayer.waveOutDevice1.Volume = (float)(percent);
 
             }
         }

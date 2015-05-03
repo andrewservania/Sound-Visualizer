@@ -11,14 +11,12 @@ namespace MediaPlayer
     {
 
         public static BindingList<short> audioData;
-        public static  Dictionary<int, short> audioGraphWindow;
+
         private  int listCapacity = SoundPlayer.bufferSize/2;
         private  int sampleCounter = 0;
         public GraphAudioBuffer()
         {
             audioData = new BindingList<short>();
-            audioGraphWindow = new Dictionary<int, short>();
-
         }
 
         public void addSample(short sample ){
@@ -27,14 +25,13 @@ namespace MediaPlayer
             {
                 //1. add the sample to the list but remove number 0;
 
-                audioGraphWindow.Add(sampleCounter, sample);
+
                 audioData.Add(sample);
                 audioData.RemoveAt(0);
                 
             }
             else
             {
-                audioGraphWindow.Add(sampleCounter, sample);
                 audioData.Add(sample);
             }
 
@@ -45,9 +42,6 @@ namespace MediaPlayer
         {
             return audioData;
         }
-        public Dictionary<int, short> getAudioData2()
-        {
-            return audioGraphWindow;
-        }
+
     }
 }

@@ -122,7 +122,7 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.openToolStripMenuItem.Text = "Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -207,9 +207,9 @@
             // 
             // volumeBar
             // 
-            this.volumeBar.Location = new System.Drawing.Point(9, 172);
+            this.volumeBar.Location = new System.Drawing.Point(9, 170);
             this.volumeBar.Name = "volumeBar";
-            this.volumeBar.Size = new System.Drawing.Size(56, 186);
+            this.volumeBar.Size = new System.Drawing.Size(43, 186);
             this.volumeBar.TabIndex = 8;
             this.volumeBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.volumeBar_Scroll);
             // 
@@ -242,7 +242,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 361);
+            this.label1.Location = new System.Drawing.Point(10, 358);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 11;
@@ -254,7 +254,7 @@
             this.volumePercentageLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.volumePercentageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.volumePercentageLabel.ForeColor = System.Drawing.Color.Lime;
-            this.volumePercentageLabel.Location = new System.Drawing.Point(4, 144);
+            this.volumePercentageLabel.Location = new System.Drawing.Point(1, 144);
             this.volumePercentageLabel.Name = "volumePercentageLabel";
             this.volumePercentageLabel.Size = new System.Drawing.Size(68, 26);
             this.volumePercentageLabel.TabIndex = 12;
