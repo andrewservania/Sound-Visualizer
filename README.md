@@ -13,7 +13,7 @@ Features:
 
 # 2D Waveform view
 
-![Alt text](https://cloud.githubusercontent.com/assets/3042333/7475336/46ecea5c-f347-11e4-9a05-88316b59acf9.png" 2D Wave Form")
+![Alt text](https://cloud.githubusercontent.com/assets/3042333/7475336/46ecea5c-f347-11e4-9a05-88316b59acf9.png " 2D Wave Form")
 
 # 3D Waveform view
-![Alt text](https://cloud.githubusercontent.com/assets/3042333/7475335/46e8ca08-f347-11e4-8741-7e487d42e3f9.png" 3D Wave Form" )
+![Alt text](https://cloud.githubusercontent.com/assets/3042333/7475335/46e8ca08-f347-11e4-8741-7e487d42e3f9.png " 3D Wave Form" )
