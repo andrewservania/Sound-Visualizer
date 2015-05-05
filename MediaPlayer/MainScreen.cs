@@ -45,7 +45,7 @@ namespace MediaPlayer
             this.AllowDrop = true;
             this.DragEnter += new DragEventHandler(Form1_DragEnter);
             this.DragDrop += new DragEventHandler(Form1_DragDrop);
-
+            SoundPlayer.PlayIntroSound();
         }
 
         private void Form1_DragDrop(object sender, DragEventArgs e)
@@ -286,7 +286,7 @@ namespace MediaPlayer
       
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Andrew's little Media Player :)\nCopyright (c) 2015 Andrew Servania");
+            MessageBox.Show("Sound Visualizer\nVersion 0.1.2 Beta :)\nCopyright (c) 2015 Andrew Servania");
         }
 
         public void clear()

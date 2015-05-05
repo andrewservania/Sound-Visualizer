@@ -96,7 +96,7 @@
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
             series1.YValueMembers = "Y";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(1286, 649);
+            this.chart1.Size = new System.Drawing.Size(977, 621);
             this.chart1.TabIndex = 3;
             this.chart1.Text = "soundChart";
             // 
@@ -108,7 +108,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1286, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(977, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -140,7 +140,7 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(9, 411);
+            this.button1.Location = new System.Drawing.Point(9, 355);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(85, 39);
             this.button1.TabIndex = 0;
@@ -152,7 +152,7 @@
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(9, 456);
+            this.button2.Location = new System.Drawing.Point(9, 400);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(85, 39);
             this.button2.TabIndex = 1;
@@ -167,7 +167,7 @@
             this.songTimeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.songTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.songTimeLabel.ForeColor = System.Drawing.Color.Lime;
-            this.songTimeLabel.Location = new System.Drawing.Point(609, 578);
+            this.songTimeLabel.Location = new System.Drawing.Point(537, 547);
             this.songTimeLabel.Name = "songTimeLabel";
             this.songTimeLabel.Size = new System.Drawing.Size(126, 26);
             this.songTimeLabel.TabIndex = 2;
@@ -181,17 +181,16 @@
             this.songName.BackColor = System.Drawing.Color.DarkBlue;
             this.songName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.songName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.songName.Location = new System.Drawing.Point(375, -2);
+            this.songName.Location = new System.Drawing.Point(220, -2);
             this.songName.Name = "songName";
-            this.songName.Size = new System.Drawing.Size(128, 26);
+            this.songName.Size = new System.Drawing.Size(0, 26);
             this.songName.TabIndex = 4;
-            this.songName.Text = "Song Name";
             // 
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(9, 501);
+            this.button3.Location = new System.Drawing.Point(9, 445);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(85, 39);
             this.button3.TabIndex = 6;
@@ -209,7 +208,7 @@
             // 
             // volumeBar
             // 
-            this.volumeBar.Location = new System.Drawing.Point(9, 172);
+            this.volumeBar.Location = new System.Drawing.Point(9, 83);
             this.volumeBar.Name = "volumeBar";
             this.volumeBar.Size = new System.Drawing.Size(56, 186);
             this.volumeBar.TabIndex = 8;
@@ -220,7 +219,7 @@
             // 
             this.radioButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(9, 555);
+            this.radioButton1.Location = new System.Drawing.Point(828, 502);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(94, 17);
             this.radioButton1.TabIndex = 9;
@@ -233,7 +232,7 @@
             this.radioButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton2.AutoSize = true;
             this.radioButton2.Checked = true;
-            this.radioButton2.Location = new System.Drawing.Point(9, 578);
+            this.radioButton2.Location = new System.Drawing.Point(828, 525);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(94, 17);
             this.radioButton2.TabIndex = 10;
@@ -245,7 +244,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 361);
+            this.label1.Location = new System.Drawing.Point(16, 272);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 11;
@@ -257,7 +256,7 @@
             this.volumePercentageLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.volumePercentageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.volumePercentageLabel.ForeColor = System.Drawing.Color.Lime;
-            this.volumePercentageLabel.Location = new System.Drawing.Point(4, 144);
+            this.volumePercentageLabel.Location = new System.Drawing.Point(4, 55);
             this.volumePercentageLabel.Name = "volumePercentageLabel";
             this.volumePercentageLabel.Size = new System.Drawing.Size(68, 26);
             this.volumePercentageLabel.TabIndex = 12;
@@ -277,21 +276,20 @@
             // seekBar
             // 
             this.seekBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.seekBar.Location = new System.Drawing.Point(0, 604);
+            this.seekBar.Location = new System.Drawing.Point(0, 576);
             this.seekBar.Maximum = 1000;
             this.seekBar.Name = "seekBar";
-            this.seekBar.Size = new System.Drawing.Size(1286, 45);
+            this.seekBar.Size = new System.Drawing.Size(977, 45);
             this.seekBar.TabIndex = 14;
             this.seekBar.TickFrequency = 10;
             this.seekBar.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.seekBar.Value = 100;
             this.seekBar.Scroll += new System.EventHandler(this.seekBar_Scroll);
             // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1286, 649);
+            this.ClientSize = new System.Drawing.Size(977, 621);
             this.Controls.Add(this.seekBar);
             this.Controls.Add(this.songLoadingLabel);
             this.Controls.Add(this.volumePercentageLabel);
@@ -311,6 +309,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainScreen";
             this.Text = "SoundVisualizer";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
