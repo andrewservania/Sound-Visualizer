@@ -3,9 +3,7 @@ A sound visualizing media player. Pretty much a beta version.
 
 Runs on Microsoft Windows
 
-Download the  .exe file here! :)
-
-[Sound Visualizer Executable File link](https://github.com/andrewservania/Sound-Visualizer/blob/master/MediaPlayer/bin/Debug/MediaPlayer.exe?raw=true)
+Download the .exe file [here link](https://github.com/andrewservania/Sound-Visualizer/blob/master/MediaPlayer/bin/Debug/MediaPlayer.exe?raw=true)! :)
 
 Features:
 - Drag-N-Drop songs you wish to play
