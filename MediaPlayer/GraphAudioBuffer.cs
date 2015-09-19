@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MediaPlayer
 {
     public class GraphAudioBuffer
     {
+        public static BindingList<float> audioData;
+        public static Dictionary<int, float> audioGraphWindow;
+        private int listCapacity = SoundPlayer.bufferSize / 2;
 
-        public static BindingList<short> audioData;
-        public static  Dictionary<int, short> audioGraphWindow;
-        private  int listCapacity = SoundPlayer.bufferSize/2;
-        private  int sampleCounter = 0;
+        private int sampleCounter = 0;
+
         public GraphAudioBuffer()
         {
-            audioData = new BindingList<short>();
-            audioGraphWindow = new Dictionary<int, short>();
-
+            audioData = new BindingList<float>();
+            audioGraphWindow = new Dictionary<int, float>();
         }
 
-        public void addSample(short sample ){
-
+        public void addSample(float sample)
+        {
             if (sampleCounter > listCapacity - 1)
             {
                 //1. add the sample to the list but remove number 0;
@@ -30,7 +26,6 @@ namespace MediaPlayer
                 audioGraphWindow.Add(sampleCounter, sample);
                 audioData.Add(sample);
                 audioData.RemoveAt(0);
-                
             }
             else
             {
@@ -41,11 +36,17 @@ namespace MediaPlayer
             sampleCounter++;
         }
 
-        public BindingList<short> getAudioData()
+        public void addSampleAccumulatively(float sample)
+        {
+            audioData.Add(sample);
+        }
+
+        public BindingList<float> getAudioData()
         {
             return audioData;
         }
-        public Dictionary<int, short> getAudioData2()
+
+        public Dictionary<int, float> getAudioData2()
         {
             return audioGraphWindow;
         }

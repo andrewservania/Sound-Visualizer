@@ -33,6 +33,11 @@ namespace MediaPlayer
         public static long endTime;
         public static long seekStepValue;
         public static int seekPrecision;
+
+        private static int zoomCount;
+        NAudio.Wave.WaveChannel32 waveChannel;
+
+        public static Chart chartReference;
         public MainScreen()
         {
             InitializeComponent();
@@ -41,12 +46,18 @@ namespace MediaPlayer
             volumePercentageLabel.Text = Math.Round(percent * 100.0) + "%";
             InitializeChart();
             SoundPlayer.songLoadedEvent += new EventHandler(songLoadedEvent);
-
+            chartReference = chart1;
             this.AllowDrop = true;
             this.DragEnter += new DragEventHandler(Form1_DragEnter);
             this.DragDrop += new DragEventHandler(Form1_DragDrop);
             SoundPlayer.PlayIntroSound();
+           
+
+          //  waveViewer1.MouseWheel += new MouseEventHandler(mouseScroll_OnWaveViewer);
         }
+
+
+
 
         private void Form1_DragDrop(object sender, DragEventArgs e)
         {
@@ -114,15 +125,19 @@ namespace MediaPlayer
 
         public void InitializeChart()
         {
+            chart1.Series.First().ChartType = SeriesChartType.FastLine;
+            
             chart1.Series.First().XValueMember = "X";
             chart1.Series.First().YValueMembers = "Y";
 
             chart1.DataSource = GraphAudioBuffer.audioData;
             chart1.DataBind();
 
-            chart1.ChartAreas.First().AxisY.Minimum = -32000.0;
-            chart1.ChartAreas.First().AxisY.Maximum = 32000.0;
+            //chart1.ChartAreas.First().AxisY.Minimum = -32000.0;
+            //chart1.ChartAreas.First().AxisY.Maximum = 32000.0;
 
+            chart1.ChartAreas.First().AxisY.Minimum = -1.0f;
+            chart1.ChartAreas.First().AxisY.Maximum = 1.0f;
 
             // Info: https://www.daniweb.com/software-development/csharp/code/451281/simple-line-graph-charting
     
@@ -132,6 +147,31 @@ namespace MediaPlayer
 
         }
 
+        //public void InitializeWaveVeawer(string filepath)
+        //{
+            
+
+        //    if(filepath.Contains(".wav")){
+        //        Stream introSoundStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(filepath);
+        //        NAudio.Wave.WaveFileReader wavReader = new NAudio.Wave.WaveFileReader(introSoundStream);
+        //        waveViewer1.WaveStream = wavReader;
+                
+        //    }
+        //    else if (filepath.Contains(".mp3"))
+        //    {
+
+        //        NAudio.Wave.audioFileReader mp3reader = new NAudio.Wave.audioFileReader(filepath);
+        //        waveViewer1.WaveStream = mp3reader;
+        //        waveChannel = new WaveChannel32(mp3reader);
+        //        waveChannel.
+        //    }
+
+            
+            
+           
+        //    zoomCount = waveViewer1.SamplesPerPixel;
+            
+        //}
        
         private void PlayButton_Click(object sender, EventArgs e)
         {
@@ -146,48 +186,54 @@ namespace MediaPlayer
                 }
                 else
                 {
-                    songPositionthreadStart = new ThreadStart(ReadSongPositionAsync);
-                    readSongPositionThread = new Thread(songPositionthreadStart);
+                    
+                    //songPositionthreadStart = new ThreadStart(ReadSongPositionAsync);
+                    //readSongPositionThread = new Thread(songPositionthreadStart);
 
                     currentTimeThreadStart = new ThreadStart(UpdateCurrentSongTime);
                     readCurrentTimeThread = new Thread(currentTimeThreadStart);
                     
-                    readSongPositionThread.Start();
+                    //readSongPositionThread.Start();
                     readCurrentTimeThread.Start();
                 }
                 soundPlayer.Play();
+                ReadSongPositionAsync();
             }
         }
 
-        public void ReadSongPositionAsync()
+        public async Task ReadSongPositionAsync()
         {
-            while (soundPlayer.mp3FileReader.Position < soundPlayer.mp3FileReader.Length)
-            {
+            Task.Run(() => {
 
-                MethodInvoker inv1 = delegate
+                while (soundPlayer.waveOutDevice.PlaybackState == PlaybackState.Playing)
                 {
 
-                    soundPlayer.updateGraph(Convert.ToInt32(soundPlayer.mp3FileReader.Position));
-                    chart1.DataBind();
-                    chart1.Update();
+                    MethodInvoker inv1 = delegate
+                    {
 
-                };
-                this.Invoke(inv1);
+                        soundPlayer.fillGraph(soundPlayer.audioFileReader.Position);
+                        chart1.DataBind();
+                        chart1.Update();
+                       // 
 
+                    };
 
-                Thread.Sleep(1);
-            }
+                    this.Invoke(inv1);
+                }       
+                Thread.Sleep(100);
+            });
+
         }
 
         public void UpdateCurrentSongTime(){
 
-            while (soundPlayer.mp3FileReader.CurrentTime < soundPlayer.mp3FileReader.TotalTime)
+            while (soundPlayer.audioFileReader.CurrentTime < soundPlayer.audioFileReader.TotalTime)
             {
                 MethodInvoker inv = delegate
                 {
-                    this.songTimeLabel.Text = soundPlayer.mp3FileReader.CurrentTime.ToString().Remove(
-                        soundPlayer.mp3FileReader.CurrentTime.ToString().Length-5,5);
-                    seekBar.Value = (int)(soundPlayer.mp3FileReader.Position / seekStepValue);
+                    this.songTimeLabel.Text = soundPlayer.audioFileReader.CurrentTime.ToString().Remove(
+                        soundPlayer.audioFileReader.CurrentTime.ToString().Length-5,5);
+                    seekBar.Value = (int)(soundPlayer.audioFileReader.Position / seekStepValue);
 
                 };
                 this.Invoke(inv);
@@ -219,8 +265,9 @@ namespace MediaPlayer
                 soundPlayer.Pause();
             }
 
-            songPositionthreadStart = new ThreadStart(ReadSongPositionAsync);
-            readSongPositionThread = new Thread(songPositionthreadStart);
+            ReadSongPositionAsync();
+           // songPositionthreadStart = new ThreadStart(ReadSongPositionAsync);
+           // readSongPositionThread = new Thread(songPositionthreadStart);
 
             currentTimeThreadStart = new ThreadStart(UpdateCurrentSongTime);
             readCurrentTimeThread = new Thread(currentTimeThreadStart);
@@ -259,6 +306,8 @@ namespace MediaPlayer
                 
                 songName.Text = openFileDialog.SafeFileName;
 
+
+              
             }
     
         }
@@ -278,8 +327,9 @@ namespace MediaPlayer
             soundPlayer = new SoundPlayer((fileName).ToString());
 
             double percent = 1.0 - (volumeBar.Value / 91.0);
+            
             soundPlayer.waveOutDevice.Volume = (float)percent;
-            endTime = soundPlayer.mp3FileReader.Length;
+            endTime = soundPlayer.audioFileReader.Length;
             seekStepValue = endTime / seekPrecision;
             PlayButton_Click(null, null);
         }
@@ -296,7 +346,8 @@ namespace MediaPlayer
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            reset(); 
+            reset();
+            Application.Exit();
         }
 
         private void StopButton_Click(object sender, EventArgs e)
@@ -321,8 +372,9 @@ namespace MediaPlayer
 
             }
 
-            songPositionthreadStart = new ThreadStart(ReadSongPositionAsync);
-            readSongPositionThread = new Thread(songPositionthreadStart);
+            ReadSongPositionAsync();
+           // songPositionthreadStart = new ThreadStart(ReadSongPositionAsync);
+           // readSongPositionThread = new Thread(songPositionthreadStart);
 
             currentTimeThreadStart = new ThreadStart(UpdateCurrentSongTime);
             readCurrentTimeThread = new Thread(currentTimeThreadStart);
@@ -359,7 +411,7 @@ namespace MediaPlayer
         {
             if (soundPlayer != null)
             {
-                soundPlayer.mp3FileReader.Seek(((TrackBar)sender).Value * seekStepValue, SeekOrigin.Begin);
+                soundPlayer.audioFileReader.Seek(((TrackBar)sender).Value * seekStepValue, SeekOrigin.Begin);
             }
         
         }

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainScreen));
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -75,9 +74,6 @@
             this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.DataSource = this.chart1.Images;
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Enabled = false;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
@@ -90,15 +86,14 @@
             series1.IsXValueIndexed = true;
             series1.LabelBorderColor = System.Drawing.Color.White;
             series1.LabelForeColor = System.Drawing.Color.BlanchedAlmond;
-            series1.Legend = "Legend1";
             series1.Name = "Series1";
             series1.XValueMember = "X";
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
             series1.YValueMembers = "Y";
             this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(977, 621);
             this.chart1.TabIndex = 3;
             this.chart1.Text = "soundChart";
+            this.chart1.TextAntiAliasingQuality = System.Windows.Forms.DataVisualization.Charting.TextAntiAliasingQuality.Normal;
             // 
             // menuStrip1
             // 
@@ -200,7 +195,10 @@
             // 
             // songLoadingProgressBar
             // 
-            this.songLoadingProgressBar.Location = new System.Drawing.Point(373, 247);
+            this.songLoadingProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.songLoadingProgressBar.Location = new System.Drawing.Point(348, 242);
             this.songLoadingProgressBar.Name = "songLoadingProgressBar";
             this.songLoadingProgressBar.Size = new System.Drawing.Size(331, 59);
             this.songLoadingProgressBar.TabIndex = 7;
@@ -219,7 +217,7 @@
             // 
             this.radioButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(828, 502);
+            this.radioButton1.Location = new System.Drawing.Point(713, 556);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(94, 17);
             this.radioButton1.TabIndex = 9;
@@ -232,7 +230,7 @@
             this.radioButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton2.AutoSize = true;
             this.radioButton2.Checked = true;
-            this.radioButton2.Location = new System.Drawing.Point(828, 525);
+            this.radioButton2.Location = new System.Drawing.Point(813, 556);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(94, 17);
             this.radioButton2.TabIndex = 10;
@@ -264,9 +262,12 @@
             // 
             // songLoadingLabel
             // 
+            this.songLoadingLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.songLoadingLabel.AutoSize = true;
             this.songLoadingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.songLoadingLabel.Location = new System.Drawing.Point(414, 257);
+            this.songLoadingLabel.Location = new System.Drawing.Point(389, 252);
             this.songLoadingLabel.Name = "songLoadingLabel";
             this.songLoadingLabel.Size = new System.Drawing.Size(249, 39);
             this.songLoadingLabel.TabIndex = 13;
