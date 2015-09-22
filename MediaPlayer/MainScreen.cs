@@ -36,6 +36,7 @@ namespace MediaPlayer
         public MainScreen()
         {
             InitializeComponent();
+
             seekPrecision = seekBar.Maximum;
             double percent = 1.0 - (volumeBar.Value / 91.0);
             volumePercentageLabel.Text = Math.Round(percent * 100.0) + "%";
@@ -49,6 +50,9 @@ namespace MediaPlayer
 
             //  waveViewer1.MouseWheel += new MouseEventHandler(mouseScroll_OnWaveViewer);
         }
+
+
+
 
         private void Form1_DragDrop(object sender, DragEventArgs e)
         {
@@ -109,10 +113,14 @@ namespace MediaPlayer
             //PlayButton_Click(null, null
         }
 
+
+
+
+
+
         public void InitializeChart()
         {
             chart1.Series.First().ChartType = SeriesChartType.FastLine;
-
             chart1.Series.First().XValueMember = "X";
             chart1.Series.First().YValueMembers = "Y";
 
@@ -180,6 +188,7 @@ namespace MediaPlayer
 
         public async Task ReadSongPositionAsync()
         {
+            
             Task.Run(() =>
             {
                 while (soundPlayer.waveOutDevice.PlaybackState == PlaybackState.Playing)
@@ -216,24 +225,18 @@ namespace MediaPlayer
         private void PauzeButton_Click(object sender, EventArgs e)
         {
             if (readCurrentTimeThread != null)
-            {
                 if (readCurrentTimeThread.IsAlive)
-                {
                     readCurrentTimeThread.Abort();
-                }
-            }
-
+                
+       
             if (readSongPositionThread != null)
-            {
                 if (readSongPositionThread.IsAlive)
-                {
                     readSongPositionThread.Abort();
-                }
-            }
+                
+            
             if (soundPlayer != null)
-            {
                 soundPlayer.Pause();
-            }
+            
 
             ReadSongPositionAsync();
             // songPositionthreadStart = new ThreadStart(ReadSongPositionAsync);
@@ -289,7 +292,6 @@ namespace MediaPlayer
         public void loadSong(object fileName)
         {
             soundPlayer = new SoundPlayer((fileName).ToString());
-
             double percent = 1.0 - (volumeBar.Value / 91.0);
 
             soundPlayer.waveOutDevice.Volume = (float)percent;
@@ -317,20 +319,9 @@ namespace MediaPlayer
         {
             songTimeLabel.Text = "00:00:00.00";
 
-            if (soundPlayer != null)
-            {
-                soundPlayer.Stop();
-            }
-
-            if (readSongPositionThread != null)
-            {
-                readSongPositionThread.Abort();
-            }
-
-            if (readCurrentTimeThread != null)
-            {
-                readCurrentTimeThread.Abort();
-            }
+            if (soundPlayer != null) soundPlayer.Stop();
+            if (readSongPositionThread != null)   readSongPositionThread.Abort();
+            if (readCurrentTimeThread != null)  readCurrentTimeThread.Abort();
 
             ReadSongPositionAsync();
             // songPositionthreadStart = new ThreadStart(ReadSongPositionAsync);
@@ -347,9 +338,7 @@ namespace MediaPlayer
             double percent = 1.0 - (e.NewValue / 91.0);
             volumePercentageLabel.Text = Math.Round(percent * 100.0) + "%";
             if (soundPlayer != null)
-            {
                 soundPlayer.waveOutDevice.Volume = (float)(percent);
-            }
         }
 
         private void TwoD_radiobutton_CheckedChanged(object sender, EventArgs e)

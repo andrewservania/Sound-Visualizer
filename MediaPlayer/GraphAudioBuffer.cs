@@ -8,7 +8,6 @@ namespace MediaPlayer
         public static BindingList<float> audioData;
         public static Dictionary<int, float> audioGraphWindow;
         private int listCapacity = SoundPlayer.bufferSize / 2;
-
         private int sampleCounter = 0;
 
         public GraphAudioBuffer()
