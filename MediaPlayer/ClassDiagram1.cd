@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MediaPlayer.GraphAudioBuffer">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIEAAAAAAAAAAAIgCAAAgAAAAAQABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GraphAudioBuffer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaPlayer.MainScreen">
+    <Position X="11" Y="0.5" Width="5" />
+    <TypeIdentifier>
+      <HashCode>XUAABASEACAAVFIoBICCACACSRK8BABCoiBBAIEAAII=</HashCode>
+      <FileName>MainScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaPlayer.Program">
+    <Position X="2.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaPlayer.SoundPlayer">
+    <Position X="0.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAIAgAABAAAQAEAJAAAhAAAoAEEAAAAIAA=</HashCode>
+      <FileName>SoundPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoundVisualizer.MySampleProvider" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="5.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MySampleProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SoundVisualizer.Properties.Resources">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SoundVisualizer.Properties.Settings">
+    <Position X="7.5" Y="3.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

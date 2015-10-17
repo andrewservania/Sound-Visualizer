@@ -11,7 +11,7 @@ namespace MediaPlayer
     {
         public IWavePlayer waveOutDevice;
         public IWavePlayer waveOutPlottingDevice;
-        private ISampleProvider sampleProvider;
+        public ISampleProvider sampleProvider;
 
         public static float[] audioChunk;
         public static float[] completeAudioFile;

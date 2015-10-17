@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using SoundVisualizer;
 
 namespace MediaPlayer
 {
@@ -21,7 +22,6 @@ namespace MediaPlayer
 
         public const string chartingAreaName = "Draw";
         public static string songFileName = string.Empty;
-
         private string lastSongName = string.Empty;
         public static long start = 0;
         public static long endTime;
@@ -31,7 +31,7 @@ namespace MediaPlayer
         private static int zoomCount;
         private NAudio.Wave.WaveChannel32 waveChannel;
 
-        public static Chart chartReference;
+        ChartManager chartManager;
 
         public MainScreen()
         {
@@ -40,9 +40,14 @@ namespace MediaPlayer
             seekPrecision = seekBar.Maximum;
             double percent = 1.0 - (volumeBar.Value / 91.0);
             volumePercentageLabel.Text = Math.Round(percent * 100.0) + "%";
+         
+            chartManager = new ChartManager(chart1,Controls);
+      
             InitializeChart();
+
             SoundPlayer.songLoadedEvent += new EventHandler(songLoadedEvent);
-            chartReference = chart1;
+
+            
             this.AllowDrop = true;
             this.DragEnter += new DragEventHandler(Form1_DragEnter);
             this.DragDrop += new DragEventHandler(Form1_DragDrop);
@@ -50,6 +55,8 @@ namespace MediaPlayer
 
             //  waveViewer1.MouseWheel += new MouseEventHandler(mouseScroll_OnWaveViewer);
         }
+
+  
 
 
 
@@ -106,11 +113,11 @@ namespace MediaPlayer
             {
                 songLoadingProgressBar.Visible = false;
                 songLoadingLabel.Visible = false;
-                chart1.DataSource = GraphAudioBuffer.audioData;
-                chart1.DataBind();
+                chartManager.GetChart().DataSource = GraphAudioBuffer.audioData;
+                chartManager.GetChart().DataBind();
             };
             this.Invoke(invoker);
-            //PlayButton_Click(null, null
+            //PlayButton_Click(null, null)
         }
 
 
@@ -120,22 +127,9 @@ namespace MediaPlayer
 
         public void InitializeChart()
         {
-            chart1.Series.First().ChartType = SeriesChartType.FastLine;
-            chart1.Series.First().XValueMember = "X";
-            chart1.Series.First().YValueMembers = "Y";
 
-            chart1.DataSource = GraphAudioBuffer.audioData;
-            chart1.DataBind();
 
-            //chart1.ChartAreas.First().AxisY.Minimum = -32000.0;
-            //chart1.ChartAreas.First().AxisY.Maximum = 32000.0;
-
-            chart1.ChartAreas.First().AxisY.Minimum = -1.0f;
-            chart1.ChartAreas.First().AxisY.Maximum = 1.0f;
-
-            // Info: https://www.daniweb.com/software-development/csharp/code/451281/simple-line-graph-charting
-
-            Controls.Add(chart1);// is this necessary?
+            
         }
 
         //public void InitializeWaveVeawer(string filepath)
@@ -196,8 +190,8 @@ namespace MediaPlayer
                     MethodInvoker inv1 = delegate
                     {
                         soundPlayer.fillGraph(soundPlayer.audioFileReader.Position);
-                        chart1.DataBind();
-                        chart1.Update();
+                        chartManager.GetChart().DataBind();
+                        chartManager.GetChart().Update();
                         //
                     };
 
@@ -343,12 +337,12 @@ namespace MediaPlayer
 
         private void TwoD_radiobutton_CheckedChanged(object sender, EventArgs e)
         {
-            chart1.ChartAreas.First().Area3DStyle.Enable3D = false;
+            chartManager.GetChart().ChartAreas.First().Area3DStyle.Enable3D = false;
         }
 
         private void ThreeD_radioButton_CheckedChanged(object sender, EventArgs e)
         {
-            chart1.ChartAreas.First().Area3DStyle.Enable3D = true;
+            chartManager.GetChart().ChartAreas.First().Area3DStyle.Enable3D = true;
         }
 
         private void seekBar_Scroll(object sender, EventArgs e)
