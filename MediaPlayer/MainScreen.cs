@@ -13,13 +13,10 @@ namespace MediaPlayer
     public partial class MainScreen : Form
     {
         public SoundPlayer soundPlayer;
-
         public ThreadStart songPositionthreadStart;
         public Thread readSongPositionThread;
-
         public ThreadStart currentTimeThreadStart;
         public Thread readCurrentTimeThread;
-
         public const string chartingAreaName = "Draw";
         public static string songFileName = string.Empty;
         private string lastSongName = string.Empty;
@@ -27,39 +24,44 @@ namespace MediaPlayer
         public static long endTime;
         public static long seekStepValue;
         public static int seekPrecision;
-
         private static int zoomCount;
         private NAudio.Wave.WaveChannel32 waveChannel;
 
         ChartManager chartManager;
+        DragAndDropHandler dragAndDropHandler;
+        GUILabelManager guiLabelManager;
 
         public MainScreen()
         {
             InitializeComponent();
-
-            seekPrecision = seekBar.Maximum;
-            double percent = 1.0 - (volumeBar.Value / 91.0);
-            volumePercentageLabel.Text = Math.Round(percent * 100.0) + "%";
          
             chartManager = new ChartManager(chart1,Controls);
-      
-            InitializeChart();
+
+
+
+            dragAndDropHandler = new DragAndDropHandler(songLoadingProgressBar, songLoadingLabel,songName);
+            guiLabelManager = new GUILabelManager(songName, songLoadingLabel, songTimeLabel, volumePercentageLabel);
+            SetVolumeLabelSlider();
 
             SoundPlayer.songLoadedEvent += new EventHandler(songLoadedEvent);
 
-            
+            // permissions
             this.AllowDrop = true;
-            this.DragEnter += new DragEventHandler(Form1_DragEnter);
+            // Events callback methods
+            this.DragEnter += new DragEventHandler(dragAndDropHandler.DragEnter);
             this.DragDrop += new DragEventHandler(Form1_DragDrop);
+
             SoundPlayer.PlayIntroSound();
 
             //  waveViewer1.MouseWheel += new MouseEventHandler(mouseScroll_OnWaveViewer);
         }
 
-  
-
-
-
+        private void SetVolumeLabelSlider()
+        {
+            seekPrecision = seekBar.Maximum;
+            double percent = 1.0 - (volumeBar.Value / 91.0);
+            volumePercentageLabel.Text = Math.Round(percent * 100.0) + "%";
+        }
 
         private void Form1_DragDrop(object sender, DragEventArgs e)
         {
@@ -73,39 +75,14 @@ namespace MediaPlayer
                 else
                 {
                     reset();
-
-                    lastSongName = songFilename;
-
-                    songLoadingProgressBar.Visible = true;
-                    songLoadingProgressBar.Style = ProgressBarStyle.Marquee;
-                    songLoadingLabel.Visible = true;
+                    dragAndDropHandler.DragDrop(sender, e);
                     Thread songLoadingThread = new Thread(new ParameterizedThreadStart(loadSong));
-                    songLoadingThread.Start(songFilename);
-
-                    string safeFileName = string.Empty;
-                    // songFilename.Trim();
-                    for (int i = songFilename.Length - 1; i > 0; i--)
-                    {
-                        if (songFilename[i] == '\\')
-                        {
-                            safeFileName = songFilename.Substring(i + 1);
-
-                            break;
-                        }
-                    }
-
-                    songName.Text = safeFileName;
+                    songLoadingThread.Start(dragAndDropHandler.GetSongFileName());
+                    songName.Text = dragAndDropHandler.GetSafeFilename(); ;
                 }
             }
         }
 
-        private void Form1_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effect = DragDropEffects.Copy;
-            }
-        }
 
         private void songLoadedEvent(object sender, EventArgs e)
         {
@@ -120,37 +97,6 @@ namespace MediaPlayer
             //PlayButton_Click(null, null)
         }
 
-
-
-
-
-
-        public void InitializeChart()
-        {
-
-
-            
-        }
-
-        //public void InitializeWaveVeawer(string filepath)
-        //{
-        //    if(filepath.Contains(".wav")){
-        //        Stream introSoundStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(filepath);
-        //        NAudio.Wave.WaveFileReader wavReader = new NAudio.Wave.WaveFileReader(introSoundStream);
-        //        waveViewer1.WaveStream = wavReader;
-
-        //    }
-        //    else if (filepath.Contains(".mp3"))
-        //    {
-        //        NAudio.Wave.audioFileReader mp3reader = new NAudio.Wave.audioFileReader(filepath);
-        //        waveViewer1.WaveStream = mp3reader;
-        //        waveChannel = new WaveChannel32(mp3reader);
-        //        waveChannel.
-        //    }
-
-        //    zoomCount = waveViewer1.SamplesPerPixel;
-
-        //}
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
@@ -299,9 +245,7 @@ namespace MediaPlayer
             MessageBox.Show("Sound Visualizer\nVersion 0.1.2 Beta :)\nCopyright (c) 2015 Andrew Servania");
         }
 
-        public void clear()
-        {
-        }
+  
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {

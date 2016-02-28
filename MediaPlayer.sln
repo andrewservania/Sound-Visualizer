@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0257AB
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcusOne", "OcusOne\OcusOne.csproj", "{46477CA0-865F-4882-80C2-21EC5FA3AF02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +24,10 @@ Global
 		{F5AD066A-0396-4987-AE69-9DD735A20BF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5AD066A-0396-4987-AE69-9DD735A20BF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5AD066A-0396-4987-AE69-9DD735A20BF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46477CA0-865F-4882-80C2-21EC5FA3AF02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46477CA0-865F-4882-80C2-21EC5FA3AF02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46477CA0-865F-4882-80C2-21EC5FA3AF02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46477CA0-865F-4882-80C2-21EC5FA3AF02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
