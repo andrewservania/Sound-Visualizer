@@ -6,3 +6,10 @@ MediaPlayer/obj/Debug/SoundVisualizer.Properties.Resources.resources
 MediaPlayer/obj/Debug/SoundVisualizer.csproj.FileListAbsolute.txt
 MediaPlayer/obj/Debug/SoundVisualizer.exe
 MediaPlayer/obj/Debug/SoundVisualizer.g.resources
+AudioPlayer/bin/Debug/
+AudioPlayer/obj/Debug/AudioPlayer.csproj.FileListAbsolute.txt
+AudioPlayer/obj/Debug/
+MediaPlayer/bin/Debug/
+MediaPlayer/obj/Debug/
+OcusOne/bin/Debug/
+OcusOne/obj/Debug/
