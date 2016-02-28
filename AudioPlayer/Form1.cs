@@ -19,7 +19,7 @@ namespace AudioPlayer
 
 
         /// <summary>
-        /// Execute when the play button is pressed
+        /// Execute action when the Play button is pressed
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -29,11 +29,21 @@ namespace AudioPlayer
         }
 
         /// <summary>
-        /// Execute when the stop button is pressed
+        /// Execute action when the Stop button is pressed
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void OnStopButtonClick(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Execute action when the 'Open File' menu is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnOpenFileClick(object sender, EventArgs e)
         {
 
         }
